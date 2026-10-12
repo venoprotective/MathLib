@@ -41,3 +41,47 @@
 ```bash
 mvn clean install
 ```
+
+### Примеры использования
+```java
+// Работа с векторами
+Vector3f v1 = new Vector3f(1.0f, 2.0f, 3.0f);
+Vector3f v2 = new Vector3f(4.0f, 5.0f, 6.0f);
+
+Vector3f sum = v1.add(v2);
+float distance = v1.distance(v2);
+Vector3f normalized = v1.normalized();
+float dotProduct = v1.dot(v2);
+Vector3f crossProduct = v1.cross(v2);
+
+// Работа с матрицами
+Matrix4x4 identity = Matrix4x4.identity();
+Matrix4x4 matrix4x4 = new Matrix4x4.ones();
+Vector4f vec4 = new Vector4f(1, 0, 0, 1);
+Vector4f newVec4 = Matrix4x4.multiply(vec4);
+matrix4x4.print(); 
+
+// Математические утилиты
+float result = MathUtils.pow(2.0f, 10.0f); // 1024.0
+float sqrt = MathUtils.sqrt(144.0f);       // 12.0
+```
+
+### Структура проекта
+```
+src/
+├── main/java/
+│   ├── MathUtils.java      # Математические утилиты
+│   ├── Vector2f.java       # 2D вектор
+│   ├── Vector3f.java       # 3D вектор
+│   ├── Vector4f.java       # 4D вектор
+│   ├── Matrix3x3.java      # Матрица 3×3
+│   └── Matrix4x4.java      # Матрица 4×4
+└── test/java/
+    └── MathUtilsTest.java  # Unit-тесты
+```
+
+### Тестирование
+На данный момент готово тестирование для:
+- MathUtilsTest.java
+- ...
+
