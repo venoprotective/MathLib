@@ -17,13 +17,20 @@ public class Vector3f {
         return new Vector3f(x - vec.x, y - vec.y, z - vec.z);
     }
 
-    public float distance() {
-        return MathUtils.sqrt(x * x + y * y + z * z);
-//        return Math.sqrt(x * x + y * y);
+    public float length() {
+        return MathUtils.sqrt(lengthSquared());
     }
 
     public float lengthSquared() {
         return x * x + y * y + z * z;
+    }
+
+    public float distance(Vector3f vec) {
+        float dx = x - vec.x;
+        float dy = y - vec.y;
+        float dz = z - vec.z;
+
+        return MathUtils.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
     public Vector3f multiply(float scalar) {
@@ -39,7 +46,7 @@ public class Vector3f {
     }
 
     public Vector3f normalized() {
-        float len = distance();
+        float len = length();
         if (len < 1e-9f) {
             throw new ArithmeticException("Cannot normalize zero vector");
         }
