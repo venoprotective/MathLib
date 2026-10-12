@@ -15,9 +15,13 @@ public class Vector2f {
         return new Vector2f(x - vec.x, y - vec.y);
     }
 
-    public float length() {
+    public float distance() {
         return MathUtils.sqrt(x * x + y * y);
 //        return Math.sqrt(x * x + y * y);
+    }
+
+    public float lengthSquared(){
+        return x * x + y * y;
     }
 
     public Vector2f multiply(float scalar) {
@@ -33,7 +37,7 @@ public class Vector2f {
     }
 
     public Vector2f normalized() {
-        float len = length();
+        float len = distance();
         if (len < 1e-9f) {
             throw new ArithmeticException("Cannot normalize zero vector");
         }
