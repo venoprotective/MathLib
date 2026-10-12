@@ -82,6 +82,17 @@ public class Matrix3x3 {
         return new Vector3f(x, y, z);
     }
 
+    public Matrix3x3 transpose() {
+        Matrix3x3 result = new Matrix3x3();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result.data[i][j] = data[j][i];
+            }
+        }
+        return result;
+    }
+
     public void print() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
