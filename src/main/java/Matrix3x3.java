@@ -10,8 +10,8 @@ public class Matrix3x3 {
             throw new IllegalArgumentException("wrong input matrix");
         }
         this.data = new float[3][3];
-        for (int row = 0; row < 3; row++) {
-            System.arraycopy(inputData[row], 0, data[row], 0, 3);
+        for (int row = 0; row < data.length; row++) {
+            System.arraycopy(inputData[row], 0, data[row], 0, data.length);
         }
     }
 
@@ -21,19 +21,31 @@ public class Matrix3x3 {
 
     public static Matrix3x3 ones() {
         Matrix3x3 result = new Matrix3x3();
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
+        for (int row = 0; row < result.data.length; row++) {
+            for (int col = 0; col < result.data[0].length; col++) {
                 result.data[row][col] = 1.0f;
             }
         }
         return result;
     }
 
+    public static Matrix3x3 identity() {
+        Matrix3x3 result = new Matrix3x3();
+        for (int i = 0; i < result.data.length; i++) {
+            result.data[i][i] = 1.0f;
+        }
+        return result;
+    }
+
     public Matrix3x3 add(Matrix3x3 matrix) {
+        if (matrix == null) {
+            throw new IllegalArgumentException("matrix must not be null");
+        }
+
         float[][] result = new float[3][3];
 
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
+        for (int row = 0; row < data.length; row++) {
+            for (int col = 0; col < data[0].length; col++) {
                 result[row][col] = data[row][col] + matrix.data[row][col];
             }
         }
@@ -42,9 +54,13 @@ public class Matrix3x3 {
     }
 
     public Matrix3x3 sub(Matrix3x3 matrix) {
+        if (matrix == null) {
+            throw new IllegalArgumentException("matrix must not be null");
+        }
+
         float[][] result = new float[3][3];
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
+        for (int row = 0; row < data.length; row++) {
+            for (int col = 0; col < data[0].length; col++) {
                 result[row][col] = data[row][col] - matrix.data[row][col];
             }
         }
@@ -53,15 +69,15 @@ public class Matrix3x3 {
     }
 
     public Matrix3x3 multiply(Matrix3x3 matrix) {
-        if (matrix.data == null || matrix.data.length != 3 || matrix.data[0].length != 3) {
-            throw new IllegalArgumentException("wrong input matrix");
+        if (matrix == null) {
+            throw new IllegalArgumentException("matrix must not be null");
         }
 
         float[][] result = new float[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[0].length; j++) {
                 float sum = 0f;
-                for (int k = 0; k < 3; k++) {
+                for (int k = 0; k < data.length; k++) {
                     sum += data[i][k] * matrix.data[k][j];
                 }
                 result[i][j] = sum;
@@ -85,8 +101,8 @@ public class Matrix3x3 {
     public Matrix3x3 transpose() {
         Matrix3x3 result = new Matrix3x3();
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[0].length; j++) {
                 result.data[i][j] = data[j][i];
             }
         }
@@ -94,8 +110,8 @@ public class Matrix3x3 {
     }
 
     public void print() {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
+        for (int row = 0; row < data.length; row++) {
+            for (int col = 0; col < data[0].length; col++) {
                 System.out.printf(" %6.2f", data[row][col]);
             }
             System.out.println();
