@@ -5,23 +5,24 @@ public class MathUtils {
     private static final float epsilon = 1e-10F;
 
     public static float sqrt(float x) {
-        if (x < 0 || Float.isNaN(x)) return Float.NaN;
-        if (x == 0.0f || x == Float.POSITIVE_INFINITY) return x;
-
-        int i = Float.floatToIntBits(x);
-        i = 0x1fbb4000 + (i >> 1); // получение приближенного грубого значения корня через сдвиг битов
-        float y = Float.intBitsToFloat(i);
-
-        if (y == 0.0f) y = Float.MIN_NORMAL;
-
-        // формула Ньютона: Новое_Y = 0.5 * (Старое_Y + X / Старое_Y)
-        y = 0.5f * (y + x / y);
-        // второй раз для бОльшей точности
-        y = 0.5f * (y + x / y);
-        // третий раз для ещё бОльшей точности
-        y = 0.5f * (y + x / y);
-
-        return y;
+        return (float) Math.sqrt(x);
+//        if (x < 0 || Float.isNaN(x)) return Float.NaN;
+//        if (x == 0.0f || x == Float.POSITIVE_INFINITY) return x;
+//
+//        int i = Float.floatToIntBits(x);
+//        i = 0x1fbb4000 + (i >> 1); // получение приближенного грубого значения корня через сдвиг битов
+//        float y = Float.intBitsToFloat(i);
+//
+//        if (y == 0.0f) y = Float.MIN_NORMAL;
+//
+//        // формула Ньютона: Новое_Y = 0.5 * (Старое_Y + X / Старое_Y)
+//        y = 0.5f * (y + x / y);
+//        // второй раз для бОльшей точности
+//        y = 0.5f * (y + x / y);
+//        // третий раз для ещё бОльшей точности
+//        y = 0.5f * (y + x / y);
+//
+//        return y;
     }
 
     public static float max(float x, float y) {
