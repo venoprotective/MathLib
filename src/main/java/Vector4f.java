@@ -3,6 +3,8 @@ public class Vector4f {
     public float y;
     public float z;
     public float w;
+    private final static float EPS = 1e-9f;
+
 
     public Vector4f(float x, float y, float z, float w) {
         this.x = x;
@@ -15,12 +17,20 @@ public class Vector4f {
         return new Vector4f(x + vec.x, y + vec.y, z + vec.z, w + vec.w);
     }
 
+    public void addInPlace(Vector4f vec) {
+        // тупой метод я написал его сюда просто чтобы был
+        this.x += vec.x;
+        this.y += vec.y;
+        this.z += vec.z;
+        this.w += vec.w;
+    }
+
     public Vector4f sub(Vector4f vec) {
         return new Vector4f(x - vec.x, y - vec.y, z - vec.z, w - vec.w);
     }
 
     public float length() {
-        return MathUtils.sqrt(lengthSquared());
+        return (float) Math.sqrt(lengthSquared());
     }
 
     public float lengthSquared() {
@@ -33,7 +43,7 @@ public class Vector4f {
         float dz = z - vec.z;
         float dw = w - vec.w;
 
-        return MathUtils.sqrt(dx * dx + dy * dy + dz * dz + dw * dw);
+        return (float) Math.sqrt(dx * dx + dy * dy + dz * dz + dw * dw);
     }
 
     public Vector4f multiply(float scalar) {
@@ -50,7 +60,7 @@ public class Vector4f {
 
     public Vector4f normalized() {
         float len = length();
-        if (len < 1e-9f) {
+        if (len < EPS) {
             throw new ArithmeticException("Cannot normalize zero vector");
         }
 

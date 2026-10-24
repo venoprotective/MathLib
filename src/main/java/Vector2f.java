@@ -1,6 +1,7 @@
 public class Vector2f {
     public float x;
     public float y;
+    private final static float EPS = 1e-9f;
 
     public Vector2f(float x, float y) {
         this.x = x;
@@ -16,10 +17,13 @@ public class Vector2f {
     }
 
     public float length() {
-        return MathUtils.sqrt(x * x + y * y);
-//        return Math.sqrt(x * x + y * y);
+        return  (float) Math.sqrt(x * x + y * y);
     }
 
+    public void addInPlace(Vector2f vec) {
+        this.x += vec.x;
+        this.y += vec.y;
+    }
     public float lengthSquared(){
         return x * x + y * y;
     }
@@ -28,7 +32,7 @@ public class Vector2f {
         float dx = x - vec.x;
         float dy = y - vec.y;
 
-        return MathUtils.sqrt(dx * dx + dy * dy);
+        return  (float) Math.sqrt(dx * dx + dy * dy);
     }
 
     public Vector2f multiply(float scalar) {
@@ -45,7 +49,7 @@ public class Vector2f {
 
     public Vector2f normalized() {
         float len = length();
-        if (len < 1e-9f) {
+        if (len < EPS) {
             throw new ArithmeticException("Cannot normalize zero vector");
         }
 

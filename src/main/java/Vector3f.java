@@ -2,6 +2,7 @@ public class Vector3f {
     public float x;
     public float y;
     public float z;
+    private final static float EPS = 1e-9f;
 
     public Vector3f(float x, float y, float z) {
         this.x = x;
@@ -13,12 +14,18 @@ public class Vector3f {
         return new Vector3f(x + vec.x, y + vec.y, z + vec.z);
     }
 
+    public void addInPlace(Vector3f vec) {
+        this.x += vec.x;
+        this.y += vec.y;
+        this.z += vec.z;
+    }
+
     public Vector3f sub(Vector3f vec) {
         return new Vector3f(x - vec.x, y - vec.y, z - vec.z);
     }
 
     public float length() {
-        return MathUtils.sqrt(lengthSquared());
+        return (float) Math.sqrt(lengthSquared());
     }
 
     public float lengthSquared() {
@@ -30,7 +37,7 @@ public class Vector3f {
         float dy = y - vec.y;
         float dz = z - vec.z;
 
-        return MathUtils.sqrt(dx * dx + dy * dy + dz * dz);
+        return (float) Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
     public Vector3f multiply(float scalar) {
@@ -47,7 +54,7 @@ public class Vector3f {
 
     public Vector3f normalized() {
         float len = length();
-        if (len < 1e-9f) {
+        if (len < EPS) {
             throw new ArithmeticException("Cannot normalize zero vector");
         }
 

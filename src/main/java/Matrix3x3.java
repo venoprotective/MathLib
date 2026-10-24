@@ -96,6 +96,7 @@ public class Matrix3x3 {
         float z = data[2][0] * vec.x + data[2][1] * vec.y + data[2][2] * vec.z;
 
         return new Vector3f(x, y, z);
+        // добаить метод умножения матрицы на вектор с изменением вектрпа
     }
 
     public Matrix3x3 transpose() {
